@@ -1,17 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { OptimizelyProvider, createInstance } from '@optimizely/react-sdk'
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+
+// Instantiate an Optimizely client
+const optimizelyClientInstance = createInstance({
+  datafile: window.optimizelyDatafile,
+  sdkKey: 'SrY3ooZtRbTP4hHzR8ppV'
+})
+
+console.log(optimizelyClientInstance)
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <OptimizelyProvider
+      	optimizely={optimizelyClientInstance}
+  			user={{id: 'simon_cordova'}}>
+        <App />
+        <h1>simon_cordova</h1>
+      </OptimizelyProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
